@@ -1,0 +1,40 @@
+{
+  "type": "FeatureCollection",
+  "features": [{
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-2.982495, 56.458457]
+      },
+      "properties": {
+        "title": "Queen Mother Building",
+        "icon": "college",
+        "description": "<strong>Computing at Dundee</strong><p><a href=\"http://www.dundee.ac.uk/computing\" target=\"_blank\" title=\"Opens in a new window\">Computing at Dundee</a> is the place to be. We have many computers and internets.</p>"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-2.983495, 56.458100]
+      },
+      "properties": {
+        "title": "Secret Rocket Base",
+        "icon": "rocket",
+        "description": "There is nothing to see here. This shouldn't even be on the map."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-2.980827, 56.458160]
+      },
+      "properties": {
+        "title": "Library",
+        "icon": "triangle",
+        "description": "Books, glorious books."
+      }
+    }
+  ]
+}
