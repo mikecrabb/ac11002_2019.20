@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+
+<body>
+
+  <h1>Movies</h1>
+  <ul id="movies"></ul>
+
+</body>
+
+</html>
+
+<script type="text/javascript">
+  function createNode(element) {
+    return document.createElement(element);
+  }
+
+  function append(parent, el) {
+    return parent.appendChild(el);
+  }
+
+  const ul = document.getElementById('movies');
+  const url = 'https://www.omdbapi.com/?s=Harry+Potter&apikey=35ed958c';
+  fetch(url)
+    .then((resp) => resp.json())
+    .then(function(data) {
+      console.log(data);
+      let movies = data.Search;
+      return movies.map(function(movie) {
+        let li = createNode('li'),
+          img = createNode('img'),
+          span = createNode('span');
+        img.src = movie.Poster;
+        span.innerHTML = `${movie.Title} ${movie.Year}`;
+        append(li, img);
+        append(li, span);
+        append(ul, li);
+      })
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
+</script>
+
+</body>
+
+</html>

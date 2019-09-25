@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  </head>
+  <body>
+    <!DOCTYPE html>
+    <html lang="en" dir="ltr">
+
+    <head>
+      <meta charset="utf-8">
+      <title></title>
+    </head>
+
+    <body>
+      <div class="container">
+        <h1>Movies</h1>
+  <div class="form-group">
+    <label for="movieTitle">Movie Search Box</label>
+    <input type="text" class="form-control" id="movieTitle">
+  </div>
+  <button class="btn btn-primary mb-4" onClick="getMovies()">Find my Movies</button>
+        <div class="row">
+          <div class="card-group" id="movies">
+
+          </div>
+        </div>
+      </div>
+
+    </body>
+
+    </html>
+
+    <script type="text/javascript">
+
+    const movieContainer = document.getElementById('movies');
+
+      function createNode(element) {
+        return document.createElement(element);
+      }
+
+      function append(parent, el) {
+        return parent.appendChild(el);
+      }
+
+      function getMovies()
+      {
+      document.getElementById("movies").innerHTML = "";
+      searchString = document.getElementById("movieTitle").value;
+      url = "https://www.omdbapi.com/?s="+searchString+"&apikey=35ed958c";
+      console.log(url);
+      fetch(url)
+        .then((resp) => resp.json())
+        .then(function(data) {
+          console.log(data);
+          let movies = data.Search;
+          return movies.map(function(movie) {
+              div = createNode('div');
+              div.setAttribute('class','col-sm-3 mb-2')
+              movieImage = movie.Poster;
+              movieTitle = movie.Title;
+              movieYear = movie.Year;
+            div.innerHTML = "<div class='card'><img class='card-img-top' src="+movieImage+"><div class='card-body'><h5 class='card-title'>"+movieTitle+"</h5><p class='card-text'>"+movieYear+"</p></div>";
+            append(movieContainer, div);
+          })
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+      }
+    </script>
+
+  </body>
+</html>

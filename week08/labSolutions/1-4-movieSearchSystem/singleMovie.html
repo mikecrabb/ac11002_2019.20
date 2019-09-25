@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  </head>
+  <body>
+    <!DOCTYPE html>
+    <html lang="en" dir="ltr">
+
+    <head>
+      <meta charset="utf-8">
+      <title></title>
+    </head>
+
+    <body>
+      <div class="container mt-4">
+        <div class="row">
+          <div class="col-md-4">
+            <img src="#" alt="" class="w-100" id="movieImage">
+          </div>
+          <div class="col-md-8">
+            <h1 id="movieTitle"></h1>
+            <h2 id="releaseDate"></h2>
+            <p id ="plot"></p>
+            <p><strong>Staring: </strong><span id="actors"></span></p>
+            <p><strong>Director: </strong><span id="director"></span></p>
+            <p><strong>Rating: </strong><span id="rating"></span>/10</p>
+            <a class="btn btn-dark" href="./index.html">Back</a>
+
+
+          </div>
+          </div>
+        </div>
+
+    </body>
+
+    </html>
+
+    <script type="text/javascript">
+
+    const movieContainer = document.getElementById('movies');
+
+      function createNode(element) {
+        return document.createElement(element);
+      }
+
+      function append(parent, el) {
+        return parent.appendChild(el);
+      }
+
+      var url = window.location.href;
+      var searchString = url.split('?');
+      searchString = searchString[1]
+      url = "https://www.omdbapi.com/?i="+searchString+"&apikey=35ed958c";
+      console.log(url);
+      fetch(url)
+        .then((resp) => resp.json())
+        .then(function(data) {
+          console.log(data);
+          let movie = data;
+              movieImage = movie.Poster;
+              movieTitle = movie.Title;
+              movieYear = movie.Year;
+              movieID = movie.imdbID;
+              movieActors = movie.Actors;
+              moviePlot = movie.Plot;
+              movieGenre = movie.Genre;
+              movieDirector = movie.Director;
+              movieRating = movie.imdbRating;
+              movieReleaseDate = movie.Released;
+
+              document.getElementById("movieImage").src=movieImage;
+              document.getElementById("movieTitle").innerHTML=movieTitle;
+              document.getElementById("releaseDate").innerHTML=movieReleaseDate;
+              document.getElementById("plot").innerHTML=moviePlot;
+              document.getElementById("actors").innerHTML = movieActors;
+              document.getElementById("director").innerHTML = movieDirector;
+              document.getElementById("rating").innerHTML = movieRating;
+
+
+
+
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    </script>
+
+  </body>
+</html>
