@@ -2,8 +2,8 @@
   "name": "ToDo TaDa",
   "short_name": "ToDo",
   "display": "standalone",
-  "theme_color": "#ef4e2a",
-  "background_color": "#fff",
+  "theme_color": "#1a1a1a",
+  "background_color": "#1a1a1a",
   "icons": [{
     "src": "https://via.placeholder.com/192x192",
     "sizes": "192x192",
