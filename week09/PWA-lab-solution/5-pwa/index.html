@@ -54,11 +54,7 @@
     <div class="container mt-4">
       <h1 class="text-light h3">Things to Do:</h1>
       <div class="row" id="toDoContainer">
-        <div class="singleToDo mb-2 col-md-12">
-          <div class="alert alert-info" id="item1">
-            <p class="mb-0"><i class="far fa-circle mr-4"></i>Your list is empty...</p>
-          </div>
-        </div>
+
       </div>
       <h1 class="text-light h3">Completed Items:</h1>
       <div class="row" id="completedContainer">
@@ -85,27 +81,23 @@
   </main>
 
   <script type="text/javascript">
-
     window.onload = checkCompleted();
     window.onload = updateToDoList();
     window.onload = updateCompletedToDoList();
 
-    function checkCompleted(){
+    function checkCompleted() {
       if (localStorage.getItem("completedItems") === null) {
         blankArray = [];
         localStorage.setItem("completedItems", JSON.stringify(blankArray));
-    }
-    if (localStorage.getItem("toDoItems") === null) {
-      blankArray = [];
-      localStorage.setItem("toDoItems", JSON.stringify(blankArray));
-  }
-  }
+      }
 
-  function deleteCompleted(){
-    localStorage.removeItem('completedItems');
-    checkCompleted();
-    updateCompletedToDoList();
-  }
+    }
+
+    function deleteCompleted() {
+      localStorage.removeItem('completedItems');
+      checkCompleted();
+      updateCompletedToDoList();
+    }
 
     document.getElementById("form-submit-button").addEventListener("click", function() {
       storedList = JSON.parse(localStorage.getItem("toDoItems"));
@@ -116,17 +108,30 @@
       document.getElementById('newToDoItem').value = "";
     });
 
+    function printNothingToDo()
+    {
+      nothingtodo = "<div class='mb-2 col-md-12'><div class='alert alert-info' id='item1'><p class='mb-0'><i class='far fa-circle mr-4'></i>Your list is empty...</p></div></div>";
+      document.getElementById('toDoContainer').innerHTML = nothingtodo;
+    }
     function updateToDoList() {
-      storedList = JSON.parse(localStorage.getItem("toDoItems"));
-      toDoContainer = document.createElement('div');
-      storedList.forEach(function(item, index) {
-        div = document.createElement('div');
-        div.setAttribute('class', 'mb-2 col-md-12');
-        div.innerHTML = "<div class='alert alert-primary mb-1' id=item-"+index+" onClick='complete("+index+")'><p class='mb-0'><i class='far fa-circle mr-4'></i>" + item + "</p></div>";
-        // console.log(div);
-        toDoContainer.appendChild(div);
-      });
-      document.getElementById('toDoContainer').innerHTML = toDoContainer.innerHTML;
+      if (localStorage.getItem("toDoItems") === null) {
+        blankArray = [];
+        localStorage.setItem("toDoItems", JSON.stringify(blankArray));
+        printNothingToDo();
+      } else if (localStorage.getItem("toDoItems") === "[]") {
+        printNothingToDo();
+      } else {
+        storedList = JSON.parse(localStorage.getItem("toDoItems"));
+        toDoContainer = document.createElement('div');
+        storedList.forEach(function(item, index) {
+          div = document.createElement('div');
+          div.setAttribute('class', 'mb-2 col-md-12');
+          div.innerHTML = "<div class='alert alert-primary mb-1' id=item-" + index + " onClick='complete(" + index + ")'><p class='mb-0'><i class='far fa-circle mr-4'></i>" + item + "</p></div>";
+          // console.log(div);
+          toDoContainer.appendChild(div);
+        });
+        document.getElementById('toDoContainer').innerHTML = toDoContainer.innerHTML;
+      }
     }
 
     function updateCompletedToDoList() {
@@ -135,7 +140,7 @@
       completedList.forEach(function(item, index) {
         div = document.createElement('div');
         div.setAttribute('class', 'mb-2 col-md-12');
-        div.innerHTML = "<div class='alert alert-success mb-1' id=item-"+index+"><p class='mb-0'><i class='far fa-circle mr-4'></i>" + item + "</p></div>";
+        div.innerHTML = "<div class='alert alert-success mb-1' id=item-" + index + "><p class='mb-0'><i class='far fa-circle mr-4'></i>" + item + "</p></div>";
         // console.log(div);
         toDoContainer.appendChild(div);
       });
@@ -144,7 +149,7 @@
 
 
 
-    function complete(index){
+    function complete(index) {
       storedList = JSON.parse(localStorage.getItem("toDoItems"));
       console.log(storedList);
       console.log(storedList[index]);
@@ -162,7 +167,6 @@
       updateToDoList();
       updateCompletedToDoList();
     }
-
   </script>
 
 </body>

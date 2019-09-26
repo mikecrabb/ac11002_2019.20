@@ -1,7 +1,6 @@
 {
   "name": "ToDo TaDa",
   "short_name": "ToDo",
-  "start_url": "https://mikecrabb.github.io/ac11002_2019.20/week09/PWA-lab-solution/5-pwa/",
   "display": "standalone",
   "theme_color": "#ef4e2a",
   "background_color": "#fff",
