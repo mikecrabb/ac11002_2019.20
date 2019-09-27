@@ -5,13 +5,26 @@
   <meta charset="utf-8">
   <title>ToDo TaDa!</title>
   <link rel="stylesheet" href="bootstrap.css">
-
+  <link rel="manifest" href="manifest.json">
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <script src="https://kit.fontawesome.com/55efebeace.js" crossorigin="anonymous"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/sw.js').then(function(registration) {
+          // Registration was successful
+          console.log('ServiceWorker registration successful with scope: ', registration.scope);
+        }, function(err) {
+          // registration failed :(
+          console.log('ServiceWorker registration failed: ', err);
+        });
+      });
+    }
+  </script>
 </head>
 
 <body class="bg-dark">
@@ -25,7 +38,7 @@
     <div class="collapse navbar-collapse" id="navbarColor03">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" href="#">All Items</a>
+          <a class="nav-link active" href="#">All Items</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Incomplete Items</a>
@@ -39,35 +52,47 @@
 
   <main>
     <div class="container mt-4">
-      <h1 class="text-light h3">Things to Do:</h1>
+      <h1 class="text-light h5">Things to Do:</h1>
       <div class="row" id="toDoContainer">
-        <div class="singleToDo mb-2 col-md-12">
-          <div class="alert alert-info" id="item1">
-            <p class="mb-0"><i class="far fa-circle mr-4"></i>Your list is empty...</p>
+        <div class='mb-2 col-md-12'>
+          <p class='mb-2 mt-2 text-center text-light border border-light p-2'><i class='far fa-thumbs-up mr-4'></i>Thumbs up - theres nothing to do!</p>
+        </div>
+        <div class='mb-2 col-md-12'>
+          <div class='alert alert-primary mb-1'>
+            <p class='mb-0'><i class='far fa-circle mr-4'></i>Get this done!</p>
           </div>
         </div>
       </div>
-      <h1 class="text-light h3">Completed Items:</h1>
-      <div class="row" id="toDoContainer">
-        <div class="singleToDo mb-2 col-md-12">
-          <div class="alert alert-success" id="item1">
-            <p class="mb-0"><i class="far fa-check mr-4"></i>Your list is empty...</p>
+      <h1 class="text-light h5">Completed Items:</h1>
+      <div class="row" id="completedContainer">
+        <div class='mb-2 col-md-12'>
+          <p class='mb-2 mt-2 text-center text-light border border-light p-2'><i class='far fa-hourglass mr-4'></i>Times ticking...better get things done</p>
+        </div>
+        <div class='mb-2 col-md-12'>
+          <div class='alert alert-success mb-1'>
+            <p class='mb-0'><i class='far fa-circle mr-4'></i>This is done!</p>
           </div>
         </div>
       </div>
-      </div>
+    </div>
+    </div>
 
-      <div class="container mt-4">
-        <h1 class="text-light h3">Add a To Do</h1>
-        <div class="row">
-          <div class="col-md-12">
-            <input type="text" class="form-control" id="newToDoItem" placeholder="Engage Hyperdrive Systems">
-            <button id="form-submit-button" type="submit" class="btn btn-primary mt-2">Save Item</button>
-          </div>
-
+    <div class="container mt-4">
+      <h1 class="text-light h5">Add a To Do</h1>
+      <div class="row">
+        <div class="col-md-12">
+          <input type="text" class="form-control" id="newToDoItem" placeholder="Engage Hyperdrive Systems">
+          <button id="form-submit-button" type="submit" class="btn btn-primary mt-3" onclick="saveItem()">Save Item</button>
+          <button class="btn btn-primary mt-3" onclick="deleteCompleted();">Delete Completed</button>
         </div>
       </div>
+    </div>
+
   </main>
+
+  <script type="text/javascript" src="./scripts.js"></script>
+
+
 </body>
 
 </html>

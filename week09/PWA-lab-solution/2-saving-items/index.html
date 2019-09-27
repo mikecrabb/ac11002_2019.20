@@ -5,13 +5,26 @@
   <meta charset="utf-8">
   <title>ToDo TaDa!</title>
   <link rel="stylesheet" href="bootstrap.css">
-
+  <link rel="manifest" href="manifest.json">
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <script src="https://kit.fontawesome.com/55efebeace.js" crossorigin="anonymous"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/sw.js').then(function(registration) {
+          // Registration was successful
+          console.log('ServiceWorker registration successful with scope: ', registration.scope);
+        }, function(err) {
+          // registration failed :(
+          console.log('ServiceWorker registration failed: ', err);
+        });
+      });
+    }
+  </script>
 </head>
 
 <body class="bg-dark">
@@ -39,70 +52,33 @@
 
   <main>
     <div class="container mt-4">
-      <h1 class="text-light h3">Things to Do:</h1>
+      <h1 class="text-light h5">Things to Do:</h1>
       <div class="row" id="toDoContainer">
-        <div class="singleToDo mb-2 col-md-12">
-          <div class="alert alert-info" id="item1">
-            <p class="mb-0"><i class="far fa-circle mr-4"></i>Your list is empty...</p>
-          </div>
-        </div>
-      </div>
-      <h1 class="text-light h3">Completed Items:</h1>
-      <div class="row" id="toDoContainer">
-        <div class="singleToDo mb-2 col-md-12">
-          <div class="alert alert-success" id="item1">
-            <p class="mb-0"><i class="far fa-check mr-4"></i>Your list is empty...</p>
-          </div>
-        </div>
-      </div>
-      </div>
 
-      <div class="container mt-4">
-        <h1 class="text-light h3">Add a To Do</h1>
-        <div class="row">
-          <div class="col-md-12">
+      </div>
+      <h1 class="text-light h5">Completed Items:</h1>
+      <div class="row" id="completedContainer">
+        </div>
+      </div>
+    </div>
+
+    <div class="container mt-4">
+      <h1 class="text-light h5">Add a To Do</h1>
+      <div class="row">
+        <div class="col-md-12">
             <input type="text" class="form-control" id="newToDoItem" placeholder="Engage Hyperdrive Systems">
-            <button id="form-submit-button" type="submit" class="btn btn-primary mt-2">Save Item</button>
-          </div>
-
+            <button id="form-submit-button" type="submit" class="btn btn-primary mt-3" onclick="saveItem()">Save Item</button>
+          <button class="btn btn-primary mt-3" onclick="deleteCompleted();">Delete Completed</button>
         </div>
       </div>
+    </div>
+
   </main>
+  <script type="text/javascript" src="./scripts.js"></script>
 
-<script type="text/javascript">
-
-var toDoArray = [];
-var completedtoDoArray = [];
-
-window.onload = updateToDoList();
-
-
-
-      document.getElementById("form-submit-button").addEventListener("click", function() {
-        storedList = JSON.parse(localStorage.getItem("toDoItems"));
-        storedList.push(document.getElementById('newToDoItem').value);
-        localStorage.setItem('toDoItems', JSON.stringify(storedList));
-        console.log(localStorage.getItem('toDoItems'));
-        updateToDoList();
-        document.getElementById('newToDoItem').value="";
-      });
-
-      function updateToDoList(){
-        var storedList = JSON.parse(localStorage.getItem("toDoItems"));
-        toDoContainer = document.createElement('div');
-        storedList.forEach(function (item, index) {
-          div = document.createElement('div');
-          div.setAttribute('class','mb-2 col-md-12');
-          div.setAttribute('id','item-'+index);
-          div.innerHTML = "<div class='alert alert-primary mb-1'><p class='mb-0'><i class='far fa-circle mr-4'></i>"+item+"</p></div>";
-          console.log(div);
-          toDoContainer.appendChild(div);
-        });
-        document.getElementById('toDoContainer').innerHTML = toDoContainer.innerHTML;
-
-      }
-
-</script>
+  <script type="text/javascript">
+    window.onload = updateToDoList();
+  </script>
 
 </body>
 
