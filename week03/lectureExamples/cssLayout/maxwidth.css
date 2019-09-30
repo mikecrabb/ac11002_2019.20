@@ -1,0 +1,16 @@
+.one{
+  width: 1000px;
+    margin: 0 auto;
+}
+
+.two{
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.funkyText{
+  background-color: red;
+  display: inline-block;
+  width: 200px;
+  padding: 0 20px;
+}
