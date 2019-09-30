@@ -1,0 +1,23 @@
+header{
+  background-color: red;
+  width: 960px;
+  padding: 100px 50px;
+}
+
+main{
+  background-color: lightblue;
+  border-color: blue;
+  border-width: 20px;
+  border-style: solid;
+  padding: 100px 50px 25px 0px;
+}
+
+footer{
+  background-color: green;
+  padding: 50px;
+}
+
+.content{
+  margin: 0 auto;
+  width:960px;
+}

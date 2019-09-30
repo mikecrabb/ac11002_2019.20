@@ -1,0 +1,22 @@
+body{
+  width: 960px;
+  margin: 0 auto;
+  padding-top: 125px;§
+}
+
+.one{
+  background-color: yellow;
+}
+
+.two{
+  background-color: orange;
+  position: relative;
+  top: 50px;
+  z-index: -99999;
+}
+
+.three{
+  background-color: lightblue;
+  position: fixed;
+  top: 0;
+}
