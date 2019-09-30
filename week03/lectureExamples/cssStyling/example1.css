@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand:300,400,500,600,700&display=swap');
+
+*{
+  font-style: italic;
+  margin: 0;
+  padding: 0;
+}
+
+.redText{
+  color: red;
+}
+
+#myFirstPara{
+  background-color: #dddddd;
+}
+
+/* .boldText{
+  font-weight: bold;
+} */
+
+main>h2{
+  color: blue;
+}
+
+a:hover{
+  font-size: 40px;
+}
+
+a:visited{
+color: orange;
+}
+
+p{
+  /* background-image: url("https://picsum.photos/600/300"); */
+/* text-transform: capitalize; */
+/* text-decoration: overline; */
+/* text-transform: uppercase; */
+font-family: 'Quicksand', sans-serif;
+font-weight:
+}
+
+.lightFont{
+  font-weight: 300;
+}
+
+.heavyFont{
+  font-weight: 700;
+}
