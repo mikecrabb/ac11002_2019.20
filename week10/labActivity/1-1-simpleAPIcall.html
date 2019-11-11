@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>1-1 Simple API Call</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.2/vue.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+
+  <div id="app">
+    <h1>Movies</h1>
+    <ul id="movies"></ul>
+    <li v-for="movie in movies"><img :src=movie.Poster>{{ movie.Title }} {{movie.Year}}</li>
+  </div>
+
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        movies: []
+      },
+      created() {
+        var vm = this
+        axios.get('https://www.omdbapi.com/?s=Harry+Potter&apikey=35ed958c')
+          .then(function(response) {
+            vm.movies = response.data.Search
+          })
+      }
+    })
+  </script>
+
+</body>
+
+</html>

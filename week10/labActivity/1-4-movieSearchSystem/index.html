@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>1-3 Picking Movies</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.2/vue.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+
+<body>
+
+  <div id="app">
+    <div class="container">
+
+      <h1>Movies</h1>
+
+      <input v-model="message" class="form-control">
+      <button v-on:click="getMovies" type="button" class="btn btn-primary my-2">Get Movies</button>
+
+
+      <div class="row">
+        <div class="card-group" id="movies">
+          <div class="col-sm-3 mb-2" v-for="movie in movies">
+            <div class='card'>
+              <img class='card-img-top' :src=movie.Poster>
+              <div class='card-body'>
+                <h5 class='card-title'>{{movie.Title}}</h5>
+                <p class='card-text'>{{movie.Year}}</p>
+                <a :href="'singleMovie.html?' + movie.imdbID" class='btn btn-primary'>More Information</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        movies: [],
+        message: ''
+      },
+      methods: {
+        getMovies: function(event) {
+          var vm = this
+          axios.get('https://www.omdbapi.com/?s=' + this.message + '&apikey=35ed958c')
+            .then(function(response) {
+              vm.movies = response.data.Search
+            })
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

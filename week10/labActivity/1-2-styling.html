@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>1-2 Styling</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.2/vue.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+
+<body>
+
+  <div id="app">
+    <div class="container">
+
+      <h1>Movies</h1>
+
+      <div class="row">
+        <div class="card-group" id="movies">
+          <div class="col-sm-3 mb-2" v-for="movie in movies">
+            <div class='card'>
+              <img class='card-img-top' :src=movie.Poster>
+              <div class='card-body'>
+                <h5 class='card-title'>{{movie.Title}}</h5>
+                <p class='card-text'>{{movie.Year}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+    <script>
+      new Vue({
+        el: '#app',
+        data: {
+          movies: []
+        },
+        created() {
+          var vm = this
+          axios.get('https://www.omdbapi.com/?s=Harry+Potter&apikey=35ed958c')
+            .then(function(response) {
+              vm.movies = response.data.Search
+            })
+        }
+      })
+    </script>
+</body>
+
+</html>
